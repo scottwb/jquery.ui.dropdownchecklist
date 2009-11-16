@@ -16,6 +16,7 @@
             $("#s4").dropdownchecklist({ maxDropHeight: 120 });
             $("#s5").dropdownchecklist({ firstItemChecksAll: true, maxDropHeight: 100 });
 			$("#s6").dropdownchecklist();
+            $("#s7").dropdownchecklist();
         });
     </script>
     <meta name="description" content="The Dropdown Check List jQuery widget transforms a regular select html element into a dropdown checkbox list">
@@ -190,6 +191,26 @@
 				<option>2</option>
 				<option selected="selected">3</option>
 			</optgroup>
+        </select>
+    </p>
+    <h2>Exclusive Options</h2>
+    <p>
+        The existing select element with id 's7' has some "exclusive" options. An option is made to be exclusive by adding the <code>exclusive="true"</code> attribute. When an exclusive option is checked, all other options are unchecked. Likewise, when any option is checked, any other options that are exclusive will be unchecked. This means that an option marked as exclusive cannot be checked with any other options.
+    </p>
+    <p>
+        <code>
+            $("#s7").dropdownchecklist();
+        </code>
+    </p>
+    <p>
+        <select id="s7" multiple="multiple">
+          <option exclusive="true">Everybody</option>
+          <option exclusive="true">Nobody</option>
+          <option selected="selected">Bart</option>
+          <option>Homer</option>
+          <option>Lisa</option>
+          <option selected="selected">Maggie</option>
+          <option selected="selected">Marge</option>
         </select>
     </p>
     <h2>Style</h2>

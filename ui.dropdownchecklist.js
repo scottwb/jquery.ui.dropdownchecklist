@@ -85,7 +85,7 @@
             return wrapper;
         },
         // Creates a drop item that coresponds to an option element in the source select
-        _createDropItem: function(index, value, text, checked, indent) {
+        _createDropItem: function(index, value, text, checked, exclusive, indent) {
             var self = this;
             // the item contains a div that contains a checkbox input and a span for text
             // the div
@@ -97,6 +97,9 @@
             var checkBox = $('<input type="checkbox"' + checkedString + '/>')
                 .attr("index", index)
                 .val(value);
+            if (exclusive) {
+                checkBox.attr("exclusive", exclusive);
+            }
             item.append(checkBox);
             // the text
             var label = $("<span/>");
@@ -184,7 +187,8 @@
             var text = option.text();
             var value = option.val();
             var selected = option.attr("selected");
-            var item = self._createDropItem(index, value, text, selected, indent);
+            var exclusive = option.attr("exclusive");
+            var item = self._createDropItem(index, value, text, selected, exclusive, indent);
             container.append(item);
         },
         // Synchronizes the items checked and the source select
@@ -212,6 +216,20 @@
                     if (allChecked) {
                         firstCheckbox.attr("checked", true);
                     }
+                }
+            }
+
+            // If this checkbox was just checked on, handle exclusivity.
+            if (senderCheckbox.attr("checked")) {
+                if (senderCheckbox.attr("exclusive") == "true") {
+                    // This checkbox is exclusive, uncheck all the others.
+                    allCheckboxes.attr("checked", false);
+                    senderCheckbox.attr("checked", true);
+                }
+                else {
+                    // This checkbox is not exclusive, just uncheck all
+                    // the others that are exclusive.
+                    dropWrapper.find("input[exclusive=true]").attr("checked", false);
                 }
             }
 
