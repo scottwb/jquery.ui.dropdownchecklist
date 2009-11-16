@@ -248,13 +248,13 @@
             var firstSelect = sourceSelect.find("option:first");
             var allSelected = null != firstSelect && firstSelect.attr("selected");
             var selectOptions = sourceSelect.find("option");
-            var text = self._formatText(selectOptions, options.firstItemChecksAll, allSelected);
+            var text = self._formatText(selectOptions, options.firstItemChecksAll, allSelected, options.defaultText);
             var controlLabel = controlWrapper.find(".ui-dropdownchecklist-text");
             controlLabel.text(text);
             controlLabel.attr("title", text);
         },
         // Formats the text that is shown in the control
-        _formatText: function(selectOptions, firstItemChecksAll, allSelected) {
+        _formatText: function(selectOptions, firstItemChecksAll, allSelected, defaultText) {
             var text;
             if (firstItemChecksAll && allSelected) {
                 // just set the text from the first item
@@ -269,6 +269,9 @@
                 });
                 if (text.length > 0) {
                     text = text.substring(0, text.length - 2);
+                }
+                else if (defaultText) {
+                    text = defaultText
                 }
             }
             return text;
@@ -401,7 +404,8 @@
             width: null,
             maxDropHeight: null,
             firstItemChecksAll: false,
-            minWidth: 50
+            minWidth: 50,
+            defaultText: null
         }
     });
 

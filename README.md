@@ -53,6 +53,18 @@ all other options that are marked as exclusive. For example:
       <option selected="true">Marge</option>
     </select>
 
+Default Empty Text
+------------------
+
+The original dropdown-check-list would show the select field as empty when
+no options were checked. This extension allows you to specify an optional
+`defaultText` option to the `dropdownchecklist()` function. For example:
+
+    $('#select_id').dropdownchecklist({defaultText:'Choose...'});
+
+This will make it so the select shows "Choose..." instead of leaving it empty,
+when there are no options checked.
+
 
 Credits
 ===============================================================================
