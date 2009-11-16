@@ -64,11 +64,11 @@
             // add the hover styles to the control
             wrapper.hover(function() {
                 if (!self.disabled) {
-                    control.toggleClass("ui-dropdownchecklist-hover")
+                    control.addClass("ui-dropdownchecklist-hover")
                 }
             }, function() {
                 if (!self.disabled) {
-                    control.toggleClass("ui-dropdownchecklist-hover")
+                    control.removeClass("ui-dropdownchecklist-hover")
                 }
             });
 
