@@ -255,8 +255,23 @@
         },
         // Formats the text that is shown in the control
         _formatText: function(selectOptions, firstItemChecksAll, allSelected, defaultText) {
+            var options = this.options;
             var text;
-            if (firstItemChecksAll && allSelected) {
+            if (options.customTextFn) {
+                var i = 0;
+                var opts = selectOptions.map(function() {
+                    var option = $(this);
+                    var opt = {
+                        index    : i,
+                        value    : option.val(),
+                        text     : option.text(),
+                        selected : option.attr("selected") ? true : false
+                    }
+                    ++i;
+                    return opt;
+                });
+                text = options.customTextFn(opts);
+            } else if (firstItemChecksAll && allSelected) {
                 // just set the text from the first item
                 text = selectOptions.filter(":first").text();
             } else {
@@ -405,7 +420,8 @@
             maxDropHeight: null,
             firstItemChecksAll: false,
             minWidth: 50,
-            defaultText: null
+            defaultText: null,
+            customTextFn: null
         }
     });
 

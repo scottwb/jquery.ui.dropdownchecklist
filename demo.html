@@ -18,6 +18,30 @@
 			$("#s6").dropdownchecklist();
             $("#s7").dropdownchecklist();
             $("#s8").dropdownchecklist({defaultText:'Choose...'});
+            $("#s9").dropdownchecklist({
+              customTextFn:function(opts) {
+                var count = 0;
+                var first = null;
+                for (var i=0, len=opts.length; i<len; ++i) {
+                  if (opts[i].selected) {
+                    if (!first) {
+                      first = opts[i].text;
+                    }
+                    ++count;
+                  }
+                }
+                switch (count) {
+                case 0:
+                  return "Nobody";
+                case 1:
+                  return first;
+                case opts.length:
+                  return "Everybody";
+                default:
+                  return count + " People"
+                }
+              }
+            });
         });
     </script>
     <meta name="description" content="The Dropdown Check List jQuery widget transforms a regular select html element into a dropdown checkbox list">
@@ -225,6 +249,47 @@
     </p>
     <p>
         <select id="s8" multiple="multiple">
+          <option>Bart</option>
+          <option>Homer</option>
+          <option>Lisa</option>
+          <option>Maggie</option>
+          <option>Marge</option>
+        </select>
+    </p>
+    <h2>Custom Select Text</h2>
+    <p>
+        The existing select element with id 's9' is set to show the text of the select box based on a custom function that uses the set of selections to determine what it wants to show.
+    </p>
+    <p>
+        <code><pre>
+            $("#s9").dropdownchecklist({
+              customTextFn:function(opts) {
+                var count = 0;
+                var first = null;
+                for (var i=0, len=opts.length; i&lt;len; ++i) {
+                  if (opts[i].selected) {
+                    if (!first) {
+                      first = opts[i].text;
+                    }
+                    ++count;
+                  }
+                }
+                switch (count) {
+                case 0:
+                  return "Nobody";
+                case 1:
+                  return first;
+                case opts.length:
+                  return "Everybody";
+                default:
+                  return count + " People"
+                }
+              }
+            });
+        </pre></code>
+    </p>
+    <p>
+        <select id="s9" multiple="multiple">
           <option>Bart</option>
           <option>Homer</option>
           <option>Lisa</option>
