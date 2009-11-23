@@ -65,6 +65,43 @@ no options were checked. This extension allows you to specify an optional
 This will make it so the select shows "Choose..." instead of leaving it empty,
 when there are no options checked.
 
+Custom Select Text
+------------------
+
+The original dropdown-checklist would show a concatenation of the selected
+options in the select field. This extension allows you to specify an optional
+`customTextFn` option to the `dropdownchecklist()` function. This function is
+called any time the set of selection changes, passing in the set of all
+options and their selection state, so that it can be used to implement custom
+logic to compute the text string to be displayed. For example, the following
+overrides this text with "Nobody", a person's name, "N People", or
+"Everybody", based on which options are selected:
+
+    $("#s9").dropdownchecklist({
+      customTextFn:function(opts) {
+        var count = 0;
+        var first = null;
+        for (var i=0, len=opts.length; i&lt;len; ++i) {
+          if (opts[i].selected) {
+            if (!first) {
+              first = opts[i].text;
+            }
+            ++count;
+          }
+        }
+        switch (count) {
+        case 0:
+          return "Nobody";
+        case 1:
+          return first;
+        case opts.length:
+          return "Everybody";
+        default:
+          return count + " People"
+        }
+      }
+    });
+
 
 Credits
 ===============================================================================
