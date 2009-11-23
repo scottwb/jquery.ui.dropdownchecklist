@@ -141,6 +141,9 @@
 			var group = $("<div />")
 			group.addClass("ui-dropdownchecklist-group");
 			group.css({whiteSpace: "nowrap"});
+			if (!text) {
+				group.addClass("nolabel");
+			}
             var label = $("<span/>");
             label.addClass("ui-dropdownchecklist-text")
                 .css({
@@ -165,7 +168,7 @@
                     var text = opt.attr("label");
                     var group = self._createGroupItem(text);
                     dropContainerDiv.append(group);
-                    self._appendOptions(opt, dropContainerDiv, index, true);
+                    self._appendOptions(opt, dropContainerDiv, index, text ? true : false);
                 }
 			});
 			//self._appendOptions(sourceSelect, dropContainerDiv, false); // when no groups

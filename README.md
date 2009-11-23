@@ -102,6 +102,15 @@ overrides this text with "Nobody", a person's name, "N People", or
       }
     });
 
+Label-less Option Groups
+------------------------
+
+This extension drops the indentation of options inside `<optgroup>` elements
+that do not have `label` attributes, and applies an additional CSS class to
+these optgroups, so that they can be styled differently. This allows, for
+example, group options without group headers or indentation, and using a
+thin border between the groups instead.
+
 
 Credits
 ===============================================================================

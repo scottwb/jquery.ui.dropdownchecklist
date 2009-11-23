@@ -42,6 +42,7 @@
                 }
               }
             });
+            $("#s10").dropdownchecklist();
         });
     </script>
     <meta name="description" content="The Dropdown Check List jQuery widget transforms a regular select html element into a dropdown checkbox list">
@@ -297,6 +298,28 @@
           <option>Marge</option>
         </select>
     </p>
+    <h2>Label-less Option Groups</h2>
+    <p>
+        The existing select element with id 's10' uses <code>&lt;optgroup&gt;</code> elements to group the options, but without specifying labels for them. In this case, the options are not indented, since the optgroup labels are not shown, and instead, the <code>.ui-dropdownchecklist-group.nolabel</code> class is applied to the groups, and CSS that is styled to show a horizontal separator between the groups.
+    </p>
+    <p>
+        <code>
+            $("#s10").dropdownchecklist();
+        </code>
+    </p>
+    <p>
+        <select id="s10" multiple="multiple">
+          <optgroup>
+            <option>Homer</option>
+            <option>Marge</option>
+          </optgroup>
+          <optgroup>
+            <option>Bart</option>
+            <option>Lisa</option>
+            <option>Maggie</option>
+          <optgroup>
+        </select>
+    </p>
     <h2>Style</h2>
     <p>
         <ul>
@@ -308,6 +331,7 @@
             <li><code>.ui-dropdownchecklist-item</code> allows to modify the style of each dropdown item</li>
             <li><code>.ui-dropdownchecklist-item-hover</code> allows to add additional style to the dropdown items when the mouse is over them</li>
 			<li><code>.ui-dropdownchecklist-group</code> allows to modify the style of group items</li>
+			<li><code>.ui-dropdownchecklist-group.nolabel</code> allows to modify the style of group items that have no labels</li>
 			<li><code>.ui-dropdownchecklist-indent</code> allows to modify the style of indented items when they are in a group</li>
         </ul>
     </p>

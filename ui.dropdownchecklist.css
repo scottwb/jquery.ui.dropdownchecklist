@@ -46,6 +46,16 @@
 	font-style: italic;
 }
 
+.ui-dropdownchecklist-group.nolabel
+{
+	border-bottom: dotted #CCCCCC 1px;
+}
+
+.ui-dropdownchecklist-group.nolabel:last-child
+{
+	border-bottom: none;
+}
+
 .ui-dropdownchecklist-indent
 {
 	padding-left: 20px;
