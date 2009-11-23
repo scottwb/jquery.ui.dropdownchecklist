@@ -81,7 +81,7 @@ overrides this text with "Nobody", a person's name, "N People", or
       customTextFn:function(opts) {
         var count = 0;
         var first = null;
-        for (var i=0, len=opts.length; i&lt;len; ++i) {
+        for (var i=0, len=opts.length; i<len; ++i) {
           if (opts[i].selected) {
             if (!first) {
               first = opts[i].text;
