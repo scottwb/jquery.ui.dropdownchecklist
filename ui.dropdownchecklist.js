@@ -95,10 +95,10 @@
             // the checkbox
             var checkedString = checked ? ' checked="checked"' : '';
             var checkBox = $('<input type="checkbox"' + checkedString + '/>')
-                .attr("index", index)
+                .prop("index", index)
                 .val(value);
             if (exclusive) {
-                checkBox.attr("exclusive", exclusive);
+                checkBox.prop("exclusive", exclusive);
             }
             item.append(checkBox);
             // the text
@@ -127,8 +127,8 @@
             // check/uncheck the item on clicks on the entire item div
             var checkItem = function(event) {
                 event.stopPropagation();
-                var checked = checkBox.attr("checked");
-                checkBox.attr("checked", !checked)
+                var checked = checkBox.prop("checked");
+                checkBox.prop("checked", !checked)
                 self._syncSelected(checkBox);
                 self.sourceSelect.trigger("change");
             }
@@ -165,7 +165,7 @@
                 if (opt.is("option")) {
                     self._appendOption(opt, dropContainerDiv, index, false);
                 } else {
-                    var text = opt.attr("label");
+                    var text = opt.prop("label");
                     var group = self._createGroupItem(text);
                     dropContainerDiv.append(group);
                     self._appendOptions(opt, dropContainerDiv, index, text ? true : false);
@@ -189,8 +189,8 @@
             var self = this;
             var text = option.text();
             var value = option.val();
-            var selected = option.attr("selected");
-            var exclusive = option.attr("exclusive");
+            var selected = option.prop("selected");
+            var exclusive = option.prop("exclusive");
             var item = self._createDropItem(index, value, text, selected, exclusive, indent);
             container.append(item);
         },
@@ -202,44 +202,44 @@
             var allCheckboxes = dropWrapper.find("input");
             if (options.firstItemChecksAll) {
                 // if firstItemChecksAll is true, check all checkboxes if the first one is checked
-                if (senderCheckbox.attr("index") == 0) {
-                    allCheckboxes.attr("checked", senderCheckbox.attr("checked"));
+                if (senderCheckbox.prop("index") == 0) {
+                    allCheckboxes.prop("checked", senderCheckbox.prop("checked"));
                 } else {
                     // check the first checkbox if all the other checkboxes are checked
                     var allChecked;
                     allChecked = true;
                     allCheckboxes.each(function(index) {
                         if (index > 0) {
-                            var checked = $(this).attr("checked");
+                            var checked = $(this).prop("checked");
                             if (!checked) allChecked = false;
                         }
                     });
                     var firstCheckbox = allCheckboxes.filter(":first");
-                    firstCheckbox.attr("checked", false);
+                    firstCheckbox.prop("checked", false);
                     if (allChecked) {
-                        firstCheckbox.attr("checked", true);
+                        firstCheckbox.prop("checked", true);
                     }
                 }
             }
 
             // If this checkbox was just checked on, handle exclusivity.
-            if (senderCheckbox.attr("checked")) {
-                if (senderCheckbox.attr("exclusive") == "true") {
+            if (senderCheckbox.prop("checked")) {
+                if (senderCheckbox.prop("exclusive") == "true") {
                     // This checkbox is exclusive, uncheck all the others.
-                    allCheckboxes.attr("checked", false);
-                    senderCheckbox.attr("checked", true);
+                    allCheckboxes.prop("checked", false);
+                    senderCheckbox.prop("checked", true);
                 }
                 else {
                     // This checkbox is not exclusive, just uncheck all
                     // the others that are exclusive.
-                    dropWrapper.find("input[exclusive=true]").attr("checked", false);
+                    dropWrapper.find("input[exclusive=true]").prop("checked", false);
                 }
             }
 
             // do the actual synch with the source select
             var selectOptions = sourceSelect.get(0).options;
             allCheckboxes.each(function(index) {
-                $(selectOptions[index]).attr("selected", $(this).attr("checked"));
+                $(selectOptions[index]).prop("selected", $(this).prop("checked"));
             });
 
             // update the text shown in the control
@@ -249,12 +249,12 @@
         _updateControlText: function() {
             var self = this, sourceSelect = this.sourceSelect, options = this.options, controlWrapper = this.controlWrapper, dropWrapper = this.dropWrapper;
             var firstSelect = sourceSelect.find("option:first");
-            var allSelected = null != firstSelect && firstSelect.attr("selected");
+            var allSelected = null != firstSelect && firstSelect.prop("selected");
             var selectOptions = sourceSelect.find("option");
             var text = self._formatText(selectOptions, options.firstItemChecksAll, allSelected, options.defaultText);
             var controlLabel = controlWrapper.find(".ui-dropdownchecklist-text");
             controlLabel.text(text);
-            controlLabel.attr("title", text);
+            controlLabel.prop("title", text);
         },
         // Formats the text that is shown in the control
         _formatText: function(selectOptions, firstItemChecksAll, allSelected, defaultText) {
@@ -268,7 +268,7 @@
                         index    : i,
                         value    : option.val(),
                         text     : option.text(),
-                        selected : option.attr("selected") ? true : false
+                        selected : option.prop("selected") ? true : false
                     }
                     ++i;
                     return opt;
@@ -281,7 +281,7 @@
                 // concatenate the text from the checked items
                 text = "";
                 selectOptions.each(function() {
-                    if ($(this).attr("selected")) {
+                    if ($(this).prop("selected")) {
                         text += $(this).text() + ", ";
                     }
                 });
@@ -379,8 +379,8 @@
             var sourceSelect = self.element;
             self.initialDisplay = sourceSelect.css("display");
             sourceSelect.css("display", "none");
-            self.initialMultiple = sourceSelect.attr("multiple");
-            sourceSelect.attr("multiple", "multiple");
+            self.initialMultiple = sourceSelect.prop("multiple");
+            sourceSelect.prop("multiple", "multiple");
             self.sourceSelect = sourceSelect;
 
             // create the drop container where the items are shown
@@ -411,7 +411,7 @@
         destroy: function() {
             $.widget.prototype.destroy.apply(this, arguments);
             this.sourceSelect.css("display", this.initialDisplay);
-            this.sourceSelect.attr("multiple", this.initialMultiple);
+            this.sourceSelect.prop("multiple", this.initialMultiple);
             this.controlWrapper.unbind().remove();
             this.dropWrapper.remove();
         }
