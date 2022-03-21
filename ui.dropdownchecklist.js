@@ -94,7 +94,7 @@
             item.css({whiteSpace: "nowrap"});
             // the checkbox
             var checkedString = checked ? ' checked="checked"' : '';
-            var checkBox = $('<input type="checkbox"' + checkedString + '/>')
+            var checkBox = $('<input disabled type="checkbox"' + checkedString + '/>')
                 .attr("index", index)
                 .val(value);
             if (exclusive) {
@@ -238,8 +238,13 @@
 
             // do the actual synch with the source select
             var selectOptions = sourceSelect.get(0).options;
-            allCheckboxes.each(function(index) {
+            allCheckboxes.each(function (index) {
+                if ($(this).attr("checked") == "checked") {
                 $(selectOptions[index]).attr("selected", $(this).attr("checked"));
+                }
+                else {
+                    $(selectOptions[index]).attr("selected", null);
+                }                
             });
 
             // update the text shown in the control
@@ -280,8 +285,9 @@
             } else {
                 // concatenate the text from the checked items
                 text = "";
-                selectOptions.each(function() {
-                    if ($(this).attr("selected")) {
+
+                selectOptions.each(function () {
+                    if ($(this).attr("selected") == 'selected') {                        
                         text += $(this).text() + ", ";
                     }
                 });
